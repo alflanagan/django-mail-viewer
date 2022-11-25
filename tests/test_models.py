@@ -24,7 +24,7 @@ class DatabaseBackendEmailMessageTest(TestCase):
         )
 
         current_dir = Path(__file__).resolve().parent
-        m.attach_file(current_dir / 'test_files' / 'icon.gif', 'image/gif')
+        m.attach_file(str(current_dir / 'test_files' / 'icon.gif'), 'image/gif')
 
         with mail.get_connection(cls.connection_backend) as connection:
             connection.send_messages([m])
@@ -45,7 +45,7 @@ class DatabaseBackendEmailMessageTest(TestCase):
         for t in test_matrix:
             with self.subTest(header=t['header_name']):
                 self.assertEqual(self.multipart_message.get(t['header_name']), t['value'])
-                # test that looking up by headeris not case sensitive
+                # test that looking up by header is not case-sensitive
                 self.assertEqual(
                     self.multipart_message.get(t['header_name']), self.multipart_message.get(t['header_name'].lower())
                 )

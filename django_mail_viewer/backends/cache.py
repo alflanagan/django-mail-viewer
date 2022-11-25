@@ -21,7 +21,7 @@ class EmailBackend(BaseEmailBackend):
         self.cache = cache.caches[mailviewer_settings.MAILVIEWER_CACHE]
         # a cache entry with a list of the rest of the cache keys
         # This is for get_outbox() so that the system knows which cache keys are there
-        # to retrieve them. Django does not have a built in way to get the keys
+        # to retrieve them. Django does not have a built-in way to get the keys
         # which exist in the cache.
         self.cache_keys_key = 'message_keys'
 
@@ -54,7 +54,7 @@ class EmailBackend(BaseEmailBackend):
         Get the outbox used by this backend.  This backend returns a copy of mail.outbox.
         May add pagination args/kwargs.
         """
-        # grabs all of the keys in the stored self.cache_keys_key
+        # grabs all the keys in the stored self.cache_keys_key
         # and passes those into get_many() to retrieve the keys
         message_keys = self.cache.get(self.cache_keys_key)
         if message_keys:
